@@ -17,7 +17,10 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { identifier, password } = req.body;
+    console.log("🛂 Login Identifier:", identifier);
+
     const user = await findUserByEmailOrId(identifier);
+    console.log("🔍 Found User:", user);
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ error: 'Invalid credentials' });
