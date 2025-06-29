@@ -121,11 +121,6 @@ export default function Login() {
           <p className="text-lg max-w-md">
             Redefining sustainability with AI-driven food distribution.
           </p>
-          <img
-            src="/illustration-login.svg"
-            alt="Sustainability Illustration"
-            className="w-80 mt-10"
-          />
         </div>
       </div>
 

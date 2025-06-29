@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
+import modelARoutes from './routes/modelA.js'; // ✅ add this line
 
 dotenv.config();
 const app = express();
@@ -13,7 +14,9 @@ app.get('/ping', (req, res) => {
   res.send('pong');
 });
 
+// Routes
 app.use('/api', authRoutes);
+app.use('/api/model-a', modelARoutes); // ✅ this mounts all /model-a endpoints
 
 const PORT = process.env.PORT || 5786;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

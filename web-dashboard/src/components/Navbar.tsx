@@ -124,7 +124,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-lg shadow-sm border-b border-gray-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#f8f9fa] shadow-md border-b border-gray-300 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link
