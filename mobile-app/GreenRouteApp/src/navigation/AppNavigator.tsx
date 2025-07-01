@@ -1,3 +1,60 @@
+// import React, { useState, createContext, useContext } from "react";
+// import { NavigationContainer } from "@react-navigation/native";
+// import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+// import LoginScreen from "../screens/LoginScreen";
+// import SignupScreen from "../screens/SignupScreen";
+// import HomeScreen from "../screens/HomeScreen";
+
+// type AuthContextType = {
+//   userToken: string | null;
+//   signIn: (token: string) => void;
+//   signOut: () => void;
+//   signUp: (token: string) => void;
+// };
+
+// const AuthContext = createContext<AuthContextType>({
+//   userToken: null,
+//   signIn: () => {},
+//   signOut: () => {},
+//   signUp: () => {},
+// });
+
+// export function useAuth() {
+//   return useContext(AuthContext);
+// }
+
+// const Stack = createNativeStackNavigator();
+
+// export default function AppNavigator() {
+//   const [userToken, setUserToken] = useState<string | null>(null);
+
+//   const authContext: AuthContextType = {
+//     userToken,
+//     signIn: (token) => setUserToken(token),
+//     signOut: () => setUserToken(null),
+//     signUp: (token) => setUserToken(token),
+//   };
+
+//   return (
+//     <AuthContext.Provider value={authContext}>
+//       <NavigationContainer>
+//         <Stack.Navigator screenOptions={{ headerShown: false }}>
+//           {userToken == null ? (
+//             <>
+//               <Stack.Screen name="Login" component={LoginScreen} />
+//               <Stack.Screen name="Signup" component={SignupScreen} />
+//             </>
+//           ) : (
+//             <Stack.Screen name="Home" component={HomeScreen} />
+//           )}
+//         </Stack.Navigator>
+//       </NavigationContainer>
+//     </AuthContext.Provider>
+//   );
+// }
+
+
 import React, { useState, createContext, useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -8,13 +65,15 @@ import HomeScreen from "../screens/HomeScreen";
 
 type AuthContextType = {
   userToken: string | null;
-  signIn: (token: string) => void;
+  user: any;
+  signIn: (token: string, user: any) => void;
   signOut: () => void;
-  signUp: (token: string) => void;
+  signUp: (token: string, user: any) => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
   userToken: null,
+  user: null,
   signIn: () => {},
   signOut: () => {},
   signUp: () => {},
@@ -28,40 +87,40 @@ const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
   const [userToken, setUserToken] = useState<string | null>(null);
+  const [user, setUser] = useState<any | null>(null);
 
   const authContext: AuthContextType = {
     userToken,
-    signIn: (token) => setUserToken(token),
-    signOut: () => setUserToken(null),
-    signUp: (token) => setUserToken(token),
+    user,
+    signIn: (token, userData) => {
+      setUserToken(token);
+      setUser(userData);
+    },
+    signOut: () => {
+      setUserToken(null);
+      setUser(null);
+    },
+    signUp: (token, userData) => {
+      setUserToken(token);
+      setUser(userData);
+    },
   };
 
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           {userToken == null ? (
             <>
-              <Stack.Screen
-                name="Login"
-                component={LoginScreen}
-                options={{ title: "Login" }}
-              />
-              <Stack.Screen
-                name="Signup"
-                component={SignupScreen}
-                options={{ title: "Sign Up" }}
-              />
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Signup" component={SignupScreen} />
             </>
           ) : (
-            <Stack.Screen
-              name="Home"
-              component={HomeScreen}
-              options={{ title: "Home" }}
-            />
+            <Stack.Screen name="Home" component={HomeScreen} />
           )}
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
   );
 }
+
