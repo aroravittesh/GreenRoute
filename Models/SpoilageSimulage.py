@@ -1,113 +1,74 @@
 import pandas as pd
-from datasets import load_dataset
-from prophet import Prophet
-import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error
 
 # CONFIG
-FORECAST_DAYS = 7
-MIN_NON_ZERO_DAYS = 10
-USE_SMOOTHING = True
-ROLLING_WINDOW = 3
+TOTAL_STOCK = 150
+SHELF_LIFE_DAYS = 5
 
-# Step 1: Load Dataset
-print("🔄 Loading FreshRetailNet-50K...")
-dataset = load_dataset("Dingdong-Inc/FreshRetailNet-50K", split="train")
-df = dataset.to_pandas()
+# Load forecast
+forecast = pd.read_csv("results/predictions_store50.csv").rename(columns={"yhat": "forecast"})
+forecast["ds"] = pd.to_datetime(forecast["ds"])
+forecast = forecast.head(SHELF_LIFE_DAYS)
 
-# Step 2: Top 5 store-product combos
-print("🔍 Finding best combos...")
-top_combos = (
-    df.groupby(["store_id", "product_id"])["sale_amount"]
-    .sum()
-    .sort_values(ascending=False)
-    .head(5)
-)
+# Load actuals
+actual = pd.read_csv("results/actual_demand.csv")
+actual["ds"] = pd.to_datetime(actual["ds"])
 
-# Step 3: Try each combo and pick best based on MAPE
-best_result = None
-for combo in top_combos.index:
-    store_id, product_id = combo
-    subset = df[(df["store_id"] == store_id) & (df["product_id"] == product_id)].copy()
-    subset["dt"] = pd.to_datetime(subset["dt"])
-    daily = subset.set_index("dt").resample("D").sum().reset_index()
-    daily = daily.rename(columns={"dt": "ds", "sale_amount": "y"})
-    daily = daily[["ds", "y"]]
+# Merge forecast and actual on 'ds'
+merged = pd.merge(forecast, actual, on="ds", how="inner")
+merged = merged[["ds", "forecast", "y"]].dropna()
 
-    # Filter out days with very low sales
-    daily = daily[daily["y"] >= 1]
+# Evaluate accuracy
+mae = mean_absolute_error(merged["y"], merged["forecast"])
+mape = mean_absolute_percentage_error(merged["y"], merged["forecast"]) * 100
 
-    # Apply rolling mean smoothing
-    if USE_SMOOTHING:
-        daily["y"] = daily["y"].rolling(window=ROLLING_WINDOW, min_periods=1).mean()
+# Print Accuracy
+print(f"\n📊 Accuracy on Shelf Life Window (first {SHELF_LIFE_DAYS} days):")
+print(f"  - MAE: {mae:.2f}")
+print(f"  - MAPE: {mape:.2f}%")
 
-    # Ensure enough non-zero data points
-    if (daily["y"] > 0).sum() < MIN_NON_ZERO_DAYS:
-        continue
+# Prepare for spoilage sim
+merged["demand"] = merged["forecast"].round().astype(int)
 
-    # Train/test split
-    train = daily[:-FORECAST_DAYS]
-    test = daily[-FORECAST_DAYS:]
+# -----------------------------
+# FIFO Simulation
+# -----------------------------
+def simulate_fifo(demand, total_stock):
+    stock_left = total_stock
+    spoilage = 0
+    for day, d in enumerate(demand):
+        if stock_left <= 0:
+            break
+        if stock_left >= d:
+            stock_left -= d
+        else:
+            stock_left = 0
+        spoilage += stock_left * (1 - ((SHELF_LIFE_DAYS - day) / SHELF_LIFE_DAYS))
+    return round(spoilage)
 
-    # Define model with better seasonality
-    model = Prophet(
-        yearly_seasonality=False,
-        weekly_seasonality=True,
-        daily_seasonality=False,
-        seasonality_mode="additive"
-    )
-    model.add_seasonality(name="monthly", period=30.5, fourier_order=5)
+# -----------------------------
+# Optimized Simulation
+# -----------------------------
+def simulate_optimized(demand, total_stock):
+    demand_sorted = sorted(list(demand), reverse=True)
+    stock_left = total_stock
+    spoilage = 0
+    for day, d in enumerate(demand_sorted):
+        if stock_left <= 0:
+            break
+        if stock_left >= d:
+            stock_left -= d
+        else:
+            stock_left = 0
+        spoilage += stock_left * (1 - ((SHELF_LIFE_DAYS - day) / SHELF_LIFE_DAYS))
+    return round(spoilage)
 
-    try:
-        model.fit(train)
-    except:
-        continue
+# Run simulations
+fifo_spoilage = simulate_fifo(merged["demand"], TOTAL_STOCK)
+optimized_spoilage = simulate_optimized(merged["demand"], TOTAL_STOCK)
+waste_saved = fifo_spoilage - optimized_spoilage
 
-    # Forecast
-    future = model.make_future_dataframe(periods=FORECAST_DAYS)
-    forecast = model.predict(future)
-
-    # Accuracy on test
-    try:
-        y_true = test["y"].values
-        y_pred = forecast.set_index("ds").loc[test["ds"]]["yhat"].values
-        mae = mean_absolute_error(y_true, y_pred)
-        mape = mean_absolute_percentage_error(y_true, y_pred) * 100
-    except:
-        continue
-
-    print(f"✅ Combo: Store {store_id}, Product {product_id} | MAE: {mae:.2f}, MAPE: {mape:.2f}%")
-
-    if best_result is None or mape < best_result["mape"]:
-        best_result = {
-            "store_id": store_id,
-            "product_id": product_id,
-            "model": model,
-            "forecast": forecast,
-            "daily": daily,
-            "mae": mae,
-            "mape": mape
-        }
-
-# Final Result
-if best_result:
-    print(f"\n🏆 Best combo: Store {best_result['store_id']}, Product {best_result['product_id']}")
-    print(f"📈 MAE: {best_result['mae']:.2f}")
-    print(f"📉 MAPE: {best_result['mape']:.2f}%")
-
-    # Save predictions
-    forecast = best_result["forecast"]
-    forecast[["ds", "yhat"]].to_csv("results/predictions.csv", index=False)
-
-    # Save actuals
-    best_result["daily"].to_csv("results/actual_demand.csv", index=False)
-
-    # Plot forecast
-    best_result["model"].plot(forecast)
-    plt.title(f"Forecast - Store {best_result['store_id']}, Product {best_result['product_id']}")
-    plt.tight_layout()
-    plt.savefig("results/forecast_plot.png")
-    plt.show()
-    print("\n✅ Forecast, plot, and actuals saved.")
-else:
-    print("❌ No valid combos found with enough data.")
+# Output Results
+print(f"\n🍌 FIFO Spoilage: {fifo_spoilage} units")
+print(f"🚛 Optimized Spoilage: {optimized_spoilage} units")
+print(f"✅ Waste Saved: {waste_saved} units ({(waste_saved / fifo_spoilage * 100):.2f}%)")
