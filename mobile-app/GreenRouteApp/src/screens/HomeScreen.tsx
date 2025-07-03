@@ -26,10 +26,21 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../navigation/AppNavigator";
 
 export default function HomeScreen() {
   const { signOut, user } = useAuth();
+  const navigation = useNavigation();
+
+  const handleCardPress = (title: string) => {
+    if (title === "Demand Forecast") {
+      navigation.navigate("ModelA");
+    }
+    if (title === "Spoilage Sim") {
+      navigation.navigate("ModelB");
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -40,7 +51,11 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         {cards.map((card, idx) => (
-          <TouchableOpacity key={idx} style={styles.card}>
+          <TouchableOpacity
+            key={idx}
+            style={styles.card}
+            onPress={() => handleCardPress(card.title)}
+          >
             <Image source={{ uri: card.image }} style={styles.cardImage} />
             <Text style={styles.cardTitle}>{card.title}</Text>
             <Text style={styles.cardDescription}>{card.description}</Text>
@@ -62,17 +77,17 @@ const cards = [
   {
     title: "Demand Forecast",
     description: "Predict future demand for your products.",
-    image: "https://www.datameer.com/wp-content/uploads/2018/06/demand-forecasting.jpg",
+    image: "https://cdn-icons-png.flaticon.com/512/3281/3281306.png",
   },
   {
     title: "Spoilage Sim",
     description: "Simulate and optimize your supply chain.",
-    image: "https://www.logisticsviewpoints.com/wp-content/uploads/2020/09/spoilage.jpg",
+    image: "https://cdn-icons-png.flaticon.com/512/2991/2991045.png",
   },
   {
     title: "Smart Routing",
     description: "Plan efficient delivery routes.",
-    image: "https://www.logisticsviewpoints.com/wp-content/uploads/2020/09/smart-routing.jpg",
+    image: "https://cdn-icons-png.flaticon.com/512/4363/4363708.png",
   },
 ];
 
@@ -139,3 +154,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+

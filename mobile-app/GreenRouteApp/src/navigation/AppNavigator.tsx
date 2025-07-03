@@ -62,6 +62,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
 import HomeScreen from "../screens/HomeScreen";
+import ModelAScreen from "../screens/modelAScreen";
+import ModelBScreen from "../screens/modelBScreen";
 
 type AuthContextType = {
   userToken: string | null;
@@ -108,19 +110,44 @@ export default function AppNavigator() {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {userToken == null ? (
-            <>
-              <Stack.Screen name="Login" component={LoginScreen} />
-              <Stack.Screen name="Signup" component={SignupScreen} />
-            </>
-          ) : (
-            <Stack.Screen name="Home" component={HomeScreen} />
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AuthContext.Provider>
+  <NavigationContainer>
+    <Stack.Navigator>
+      {userToken == null ? (
+        <>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Signup"
+            component={SignupScreen}
+            options={{ headerShown: false }}
+          />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ModelA"
+            component={ModelAScreen}
+            options={{ headerShown: true, title: "Demand Forecast" }}
+          />
+          <Stack.Screen
+            name="ModelB"
+            component={ModelBScreen}
+            options={{ headerShown: true, title: "Demand Forecast" }}
+          />
+        </>
+      )}
+    </Stack.Navigator>
+  </NavigationContainer>
+</AuthContext.Provider>
+
   );
 }
 
