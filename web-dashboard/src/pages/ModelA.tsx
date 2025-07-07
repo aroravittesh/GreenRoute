@@ -303,6 +303,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import { motion } from "framer-motion";
 
 export default function ModelA() {
   const [productId, setProductId] = useState("");
@@ -343,6 +344,14 @@ export default function ModelA() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#f1f8e9" }}>
       <Navbar />
+      <motion.div
+      key="home"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 1 }}
+      style={{ padding: "2rem" }}
+    >
       <main className="pt-24 px-6 max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold text-gray-800">Product Sales Forecast</h1>
@@ -410,6 +419,7 @@ export default function ModelA() {
           </div>
         )}
       </main>
+      </motion.div>
     </div>
   );
 }

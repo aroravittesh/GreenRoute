@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const { token, user } = useAuth();
@@ -16,6 +17,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <Navbar />
+      <motion.div
+      key="home"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 1 }}
+      style={{ padding: "2rem" }}
+    >
       <main className="pt-24 px-8 max-w-7xl mx-auto space-y-28">
 
         {/* Header */}
@@ -85,6 +94,7 @@ export default function Home() {
           </p>
         </section>
       </main>
+      </motion.div>
     </div>
   );
 }

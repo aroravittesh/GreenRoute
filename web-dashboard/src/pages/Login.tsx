@@ -81,6 +81,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const [identifier, setIdentifier] = useState("");
@@ -114,7 +115,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left: Branding Side */}
+      {/* Left: Branding Side */}     
       <div className="hidden md:flex w-1/2 bg-gradient-to-br from-green-700 to-emerald-800 text-white items-center justify-center px-12">
         <div className="space-y-6">
           <h1 className="text-5xl font-extrabold tracking-tight leading-tight">GreenRoute</h1>
@@ -126,7 +127,15 @@ export default function Login() {
 
       {/* Right: Login Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center bg-white px-8">
-        <div className="max-w-md w-full space-y-8">
+      <motion.div
+      key="home"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+      style={{ padding: "10rem" }}
+    >
+      <div className="space-y-8">
           <div>
             <h2 className="text-3xl font-bold text-gray-800 text-center">Sign in to your account</h2>
             <p className="text-sm text-gray-500 text-center mt-2">
@@ -168,7 +177,8 @@ export default function Login() {
               Sign up
             </button>
           </div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

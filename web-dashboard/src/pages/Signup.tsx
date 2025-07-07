@@ -93,6 +93,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -124,84 +125,86 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left Branding Panel */}
-      <div className="hidden md:flex w-1/2 bg-gradient-to-br from-green-700 to-emerald-800 text-white items-center justify-center px-12">
-        <div className="space-y-6">
-          <h1 className="text-5xl font-extrabold tracking-tight leading-tight">Join GreenRoute</h1>
-          <p className="text-lg max-w-md">
-            Revolutionizing sustainable supply chains through AI-powered forecasting.
-          </p>
-          <img
-            src="/illustration-signup.svg"
-            alt="Sustainability Illustration"
-            className="w-80 mt-10"
-          />
-        </div>
-      </div>
-
-      {/* Signup Form */}
-      <div className="w-full md:w-1/2 flex items-center justify-center bg-white px-8">
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-800 text-center">Create your account</h2>
-            <p className="text-sm text-gray-500 text-center mt-2">
-              Get started with the platform
+      <div className="min-h-screen flex">
+        {/* Left Branding Panel */}
+        <div className="hidden md:flex w-1/2 bg-gradient-to-br from-green-700 to-emerald-800 text-white items-center justify-center px-12">
+          <div className="space-y-6">
+            <h1 className="text-5xl font-extrabold tracking-tight leading-tight">Join GreenRoute</h1>
+            <p className="text-lg max-w-md">
+              Revolutionizing sustainable supply chains through AI-powered forecasting.
             </p>
           </div>
-
-          <div className="space-y-5">
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none shadow-sm transition"
-            />
-
-            <input
-              type="text"
-              placeholder="Employee ID"
-              value={employeeId}
-              onChange={(e) => setEmployeeId(e.target.value.toUpperCase())}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none shadow-sm transition"
-            />
-
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none shadow-sm transition"
-            />
-
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none shadow-sm transition"
-            />
-
-            <button
-              onClick={handleSignup}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-xl shadow-md transition"
-            >
-              Sign Up
-            </button>
-          </div>
-
-          <div className="text-center text-sm text-gray-500">
-            Already have an account?{" "}
-            <button
-              onClick={() => navigate("/login")}
-              className="text-green-600 hover:underline font-medium"
-            >
-              Log In
-            </button>
-          </div>
+        </div>
+    
+        {/* Right Signup Form */}
+        <div className="w-full md:w-1/2 flex items-center justify-center bg-white px-8">
+          <motion.div
+            key="signup"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-md w-full"
+          >
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-800 text-center">Create your account</h2>
+                <p className="text-sm text-gray-500 text-center mt-2">
+                  Get started with the platform
+                </p>
+              </div>
+    
+              <div className="space-y-5">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none shadow-sm transition"
+                />
+                <input
+                  type="text"
+                  placeholder="Employee ID"
+                  value={employeeId}
+                  onChange={(e) => setEmployeeId(e.target.value.toUpperCase())}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none shadow-sm transition"
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none shadow-sm transition"
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none shadow-sm transition"
+                />
+                <button
+                  onClick={handleSignup}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-xl shadow-md transition"
+                >
+                  Sign Up
+                </button>
+              </div>
+    
+              <div className="text-center text-sm text-gray-500">
+                Already have an account?{" "}
+                <button
+                  onClick={() => navigate("/login")}
+                  className="text-green-600 hover:underline font-medium"
+                >
+                  Log In
+                </button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
-    </div>
-  );
+    );
+    
+ 
 }
