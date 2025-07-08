@@ -106,7 +106,7 @@ export default function DistributionPlanner() {
                   </tr>
                 </thead>
                 <tbody className="text-gray-700">
-                  {csvData.slice(1).map((row, idx) => (
+                  {csvData.slice(1).filter(row => !isNaN(parseFloat(row[1]))).map((row, idx) => (
                     <tr key={idx} className="border-t">
                       {row.map((cell, i) => (
                         <td key={i} className="px-6 py-3">

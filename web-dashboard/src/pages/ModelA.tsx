@@ -407,7 +407,7 @@ export default function ModelA() {
                   </tr>
                 </thead>
                 <tbody className="text-gray-700">
-                  {csvData.slice(1).map((row, idx) => (
+                  {csvData.slice(1).filter(row => !isNaN(parseFloat(row[1]))).map((row, idx) => (
                     <tr key={idx} className="border-t">
                       <td className="px-6 py-3">{row[0]}</td>
                       <td className="px-6 py-3">{parseFloat(row[1]).toFixed(2)}</td>

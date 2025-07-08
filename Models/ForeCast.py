@@ -388,11 +388,11 @@ import os
 import sys
 
 # Step 1: Read CLI argument
-# if len(sys.argv) < 2:
-#     print("❌ Usage: python ForeCast.py <product_id>")
-#     sys.exit(1)
+if len(sys.argv) < 2:
+    print("❌ Usage: python ForeCast.py <product_id>")
+    sys.exit(1)
 
-product_id = 267
+product_id = int(sys.argv[1])
 print(f"🔍 Running monthly forecast for Product {product_id}")
 
 # Step 2: Load dataset
