@@ -1,97 +1,152 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+ 
+# 🛣️ GreenRoute — Sustainable Retail Supply Chain Optimizer
 
-# Getting Started
+GreenRoute is a full-stack platform built to help **central retail hubs** reduce food spoilage and optimize distribution using **AI-powered demand forecasting**, **spoilage simulation**, and **smart inventory planning**. It enables central teams to make data-driven decisions that enhance supply efficiency across multiple stores.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🔍 Problem It Solves  
+Retail chains often face:
+- Overstocking and understocking across stores
+- Food spoilage due to poor demand estimation
+- Inefficient, static inventory distribution
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+**GreenRoute** addresses these issues by:
+- Predicting store-wise product demand
+- Simulating spoilage based on shelf life
+- Generating optimized stock allocation plans from the central hub
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+---
 
-```sh
-# Using npm
-npm start
+## ⚙️ Key Features
 
-# OR using Yarn
-yarn start
+1. **📊 Demand Forecasting**
+   - Trains AI models (Facebook Prophet) on historical sales data
+   - Forecasts 30-day demand per store-product
+   - Outputs include charts and downloadable CSVs
+
+2. **🧊 Spoilage Simulation**
+   - Calculates waste under FIFO and optimized routing
+   - Uses shelf life logic to estimate spoilage
+   - Compares naive vs AI-optimized planning
+
+3. **🚚 Smart Inventory Planning**
+   - Suggests stock routing from the central hub
+   - Minimizes spoilage and stockouts
+   - Exports shipment plans for operations
+
+---
+
+## 📁 Project Structure
+
+```
+GreenRoute/
+│
+├── backend/                    → Node.js + Express backend with PostgreSQL
+├── mobile-app/GreenRouteApp/  → React Native CLI mobile app
+├── Models/                    → AI models (Prophet-based forecasting and spoilage simulation)
+└── web-dashboard/             → React.js + Tailwind CSS dashboard (hosted on Vercel)
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## ⚙️ Setup Instructions
 
-### Android
+### 1️⃣ Backend (Node.js + PostgreSQL)
 
-```sh
-# Using npm
-npm run android
+#### 📦 Requirements:
+- Node.js v20.19.3 **(⚠️ Must be at least v20.19.3 or higher)**
+- PostgreSQL (running locally or cloud)
+- `.env` file setup
 
-# OR using Yarn
-yarn android
+#### 📁 `.env` example:
+```
+PORT=5786
+DATABASE_URL=your_postgres_connection_string
+JWT_SECRET=your_secure_jwt_key
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+#### 🚀 To Run Backend:
+```bash
+cd backend
+npm install
+node index.js
 ```
 
-Then, and every time you update your native dependencies, run:
+---
 
-```sh
-bundle exec pod install
+### 2️⃣ Web Dashboard (React.js + Tailwind CSS)
+
+#### ⚠️ Important:
+- Requires **Node.js v20.19.3 or higher** (lower versions will break build due to Vite compatibility)
+
+#### 🚀 To Run:
+```bash
+cd web-dashboard
+npm install
+npm run dev
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+- Hosted on: [Vercel](https://vercel.com/) (production version)
 
-```sh
-# Using npm
-npm run ios
+---
 
-# OR using Yarn
-yarn ios
+### 3️⃣ Mobile App (React Native CLI)
+
+#### 📦 Requirements:
+- React Native CLI setup
+- Android Studio or Xcode
+- Emulator or real device
+
+#### 🚀 To Run:
+```bash
+cd mobile-app/GreenRouteApp
+npm install
+
+# For Android
+npx react-native run-android
+
+# For iOS
+npx react-native run-ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+### 4️⃣ AI Models (Facebook Prophet)
 
-## Step 3: Modify your app
+#### 🧠 Location: `Models/`
 
-Now that you have successfully run the app, let's make changes!
+- Contains Python scripts for:
+  - Store-wise product demand forecasting
+  - Spoilage simulation based on shelf life and routing
+- These are automatically triggered from the backend; no manual execution needed
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+#### 📦 Install Python Dependencies:
+```bash
+cd models
+pip install pandas scikit-learn matplotlib datasets prophet seaborn
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+---
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## 🧪 Tech Stack
 
-## Congratulations! :tada:
+| Layer       | Tech                        |
+|-------------|-----------------------------|
+| Frontend    | React.js, Tailwind CSS      |
+| Mobile      | React Native CLI            |
+| Backend     | Node.js, Express.js         |
+| Database    | PostgreSQL                  |
+| AI Models   | Facebook Prophet (Python)   |
+| Hosting     | Vercel (frontend), EC2 (backend)
 
-You've successfully run and modified your React Native App. :partying_face:
+---
 
-### Now what?
+## 🔐 Notes & Warnings
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- 🔑 Ensure `.env` is created in `backend/` before starting the server
+- ⚠️ Use Node.js **v20.19.3 or above** to avoid compatibility issues with Vite in `web-dashboard`
+- ✅ PostgreSQL DB must be up and accessible with correct credentials
+- ❌ Do **not** expose `.env` or API keys publicly
 
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
