@@ -46,7 +46,7 @@ export default function DistributionPlanner() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 1 }}
       style={{ padding: "2rem" }}
     >
       <main className="pt-24 px-6 max-w-7xl mx-auto">

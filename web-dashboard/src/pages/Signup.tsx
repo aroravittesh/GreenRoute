@@ -143,7 +143,7 @@ export default function Signup() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 1 }}
             className="max-w-md w-full"
           >
             <div className="space-y-8">
