@@ -107,7 +107,7 @@ export default function ModelAScreen() {
               ))}
             </View>
             {/* Rows */}
-            {csvData.slice(1).map((row, rowIdx) => (
+            {csvData.slice(1).filter(row => !isNaN(parseFloat(row[1]))).map((row, rowIdx) => (
               <View key={rowIdx} className="flex-row border-b border-gray-100 py-2">
                 {row.map((cell, cellIdx) => (
                   <Text key={cellIdx} className="flex-1 text-gray-600">

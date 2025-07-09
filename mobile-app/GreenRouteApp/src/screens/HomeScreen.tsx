@@ -40,6 +40,9 @@ export default function HomeScreen() {
     if (title === "Spoilage Sim") {
       navigation.navigate("ModelB");
     }
+    if (title === "Smart Routing") {
+      navigation.navigate("ModelC");
+    }
   };
 
   return (
@@ -56,7 +59,10 @@ export default function HomeScreen() {
             style={styles.card}
             onPress={() => handleCardPress(card.title)}
           >
+            <View style={styles.imageWrapper}>
             <Image source={{ uri: card.image }} style={styles.cardImage} />
+            </View>
+
             <Text style={styles.cardTitle}>{card.title}</Text>
             <Text style={styles.cardDescription}>{card.description}</Text>
           </TouchableOpacity>
@@ -122,10 +128,10 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
-    height: 160,
+    height: "100%",
     borderRadius: 10,
     marginBottom: 12,
-    resizeMode: "cover",
+    resizeMode: "contain",
   },
   cardTitle: {
     fontSize: 20,
@@ -152,6 +158,14 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 16,
     textAlign: "center",
+  },
+  imageWrapper: {
+    width: "100%",
+    height: 160,
+    overflow: "hidden",
+    borderRadius: 10,
+    backgroundColor: "#f5f5f5",
+    marginBottom: 12,
   },
 });
 

@@ -3,50 +3,53 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image,
   ScrollView,
+  Image,
   ActivityIndicator,
 } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function SpoilageForecastScreen() {
+export default function ModelCScreen() {
   const [chartUrl, setChartUrl] = useState<string | null>(null);
   const [csvData, setCsvData] = useState<string[][]>([]);
+  const [metrics, setMetrics] = useState<{ mae: string; mape: string } | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // 🧠 Use your MacBook IP
-  const BASE_URL = "http://192.168.29.190:5786";
+  const BASE_URL = "http://192.168.29.190:5786"; // ✅ Update to your IP
 
   useEffect(() => {
-    const loadStoredData = async () => {
+    const loadStored = async () => {
       try {
-        const savedChart = await AsyncStorage.getItem("modelB_chart");
-        const savedCsv = await AsyncStorage.getItem("modelB_csv");
+        const savedChart = await AsyncStorage.getItem("modelC_chart");
+        const savedCsv = await AsyncStorage.getItem("modelC_csv");
+        const savedMetrics = await AsyncStorage.getItem("modelC_metrics");
+
         if (savedChart) setChartUrl(savedChart);
         if (savedCsv) setCsvData(JSON.parse(savedCsv));
+        if (savedMetrics) setMetrics(JSON.parse(savedMetrics));
       } catch (err) {
-        console.log("⚠️ Error loading stored data:", err);
+        console.error("⚠️ Load error:", err);
       }
     };
-    loadStoredData();
+    loadStored();
   }, []);
 
-  const runSimulation = async () => {
+  const runDistribution = async () => {
     setLoading(true);
     try {
-      await axios.get(`${BASE_URL}/api/model-b/run`);
-      const newChartUrl = `${BASE_URL}/api/model-b/image?ts=${Date.now()}`;
-      const csv = await axios.get(`${BASE_URL}/api/model-b/predictions`);
-      const parsed = csv.data.split("\n").map((row: string) => row.split(","));
+      const result = await axios.get(`${BASE_URL}/api/model-c/run`);
+      const chart = `${BASE_URL}/api/model-c/image?ts=${Date.now()}`;
+      const csv = await axios.get(`${BASE_URL}/api/model-c/predictions`);
+      const parsedCsv = csv.data.split("\n").map((row: string) => row.split(","));
 
-      setChartUrl(newChartUrl);
-      setCsvData(parsed);
+      setChartUrl(chart);
+      setCsvData(parsedCsv);
 
-      await AsyncStorage.setItem("modelB_chart", newChartUrl);
-      await AsyncStorage.setItem("modelB_csv", JSON.stringify(parsed));
+      await AsyncStorage.setItem("modelC_chart", chart);
+      await AsyncStorage.setItem("modelC_csv", JSON.stringify(parsedCsv));
     } catch (err) {
-      alert("Failed to run simulation");
+      alert("Failed to run distribution planner.");
     } finally {
       setLoading(false);
     }
@@ -54,21 +57,24 @@ export default function SpoilageForecastScreen() {
 
   return (
     <ScrollView className="flex-1 bg-lime-50 px-4 pt-16">
-      <Text className="text-2xl font-bold text-gray-800 mb-2">🛒 Spoilage Forecast (Model B)</Text>
-      <Text className="text-gray-600 mb-6">Forecast vs Actual Sales for 30 Days</Text>
+      <Text className="text-2xl font-bold text-gray-800 mb-2">🚚 Distribution Planner (Model C)</Text>
+      <Text className="text-gray-600 mb-6">
+        Optimize stock allocation across stores based on demand.
+      </Text>
 
       <TouchableOpacity
-        onPress={runSimulation}
+        onPress={runDistribution}
         className="bg-green-700 px-5 py-3 rounded-md mb-8"
       >
         <Text className="text-white text-center font-medium">
-          {loading ? "Running..." : "Run Forecast"}
+          {loading ? "Optimizing..." : "Run Distribution"}
         </Text>
       </TouchableOpacity>
 
-      {chartUrl && (
+
+    {chartUrl && (
         <View className="bg-white rounded-lg shadow p-4 mb-10">
-          <Text className="text-lg font-semibold text-gray-800 mb-3">📈 Forecast Chart</Text>
+          <Text className="text-lg font-semibold text-gray-800 mb-3">📈 Distribution Chart</Text>
           <Image
             source={{ uri: chartUrl }}
             style={{
@@ -83,7 +89,7 @@ export default function SpoilageForecastScreen() {
 
       {csvData.length > 1 && (
         <View className="bg-white rounded-lg shadow p-4 mb-16">
-          <Text className="text-lg font-semibold text-gray-800 mb-3">📄 Prediction Table</Text>
+          <Text className="text-lg font-semibold text-gray-800 mb-3">📄 Distribution Table</Text>
           {/* Headers */}
           <View className="flex-row border-b border-gray-200 pb-2 mb-2">
             {csvData[0].map((header, idx) => (
@@ -105,7 +111,7 @@ export default function SpoilageForecastScreen() {
         </View>
       )}
 
-      {loading && <ActivityIndicator size="large" color="#4CAF50" />}
+      {loading && <ActivityIndicator size="large" color="#FFB300" />}
     </ScrollView>
   );
 }

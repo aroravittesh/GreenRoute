@@ -64,6 +64,7 @@ import SignupScreen from "../screens/SignupScreen";
 import HomeScreen from "../screens/HomeScreen";
 import ModelAScreen from "../screens/modelAScreen";
 import ModelBScreen from "../screens/modelBScreen";
+import ModelCScreen from "../screens/modelCScreen";
 
 type AuthContextType = {
   userToken: string | null;
@@ -140,7 +141,12 @@ export default function AppNavigator() {
           <Stack.Screen
             name="ModelB"
             component={ModelBScreen}
-            options={{ headerShown: true, title: "Demand Forecast" }}
+            options={{ headerShown: true, title: "Spoilage Sim" }}
+          />
+          <Stack.Screen
+            name="ModelC"
+            component={ModelCScreen}
+            options={{ headerShown: true, title: "Smart Routing" }}
           />
         </>
       )}
