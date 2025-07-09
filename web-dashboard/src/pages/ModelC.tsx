@@ -185,7 +185,7 @@ export default function DistributionPlanner() {
       >
         <div className="mb-10">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Smart Distribution Planner (Model C)
+            Smart Distribution Planner
           </h1>
           <p className="text-gray-600 mb-4">
             Allocate limited stock across top stores based on forecasted demand.

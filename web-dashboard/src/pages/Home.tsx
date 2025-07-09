@@ -33,7 +33,7 @@ export default function Home() {
             Welcome, {user.name.split(" ")[0]}
           </h1>
           <p className="text-gray-700 text-lg max-w-2xl mx-auto">
-            This dashboard guides you through GreenRoute’s AI-driven retail optimization.
+            This dashboard guides you through Sanchaya’s AI-driven retail optimization.
             Explore model-based insights to minimize food waste and streamline distribution.
           </p>
         </section>
@@ -90,7 +90,7 @@ export default function Home() {
         {/* Footer */}
         <section className="text-center pb-20">
           <p className="text-gray-600 text-sm">
-            Built for GreenRoute | Powered by AI | Last synced: {new Date().toLocaleDateString()}
+            Built for Sanchaya | Powered by AI | Last synced: {new Date().toLocaleDateString()}
           </p>
         </section>
       </main>

@@ -37,7 +37,7 @@ export default function HomeScreen() {
     if (title === "Demand Forecast") {
       navigation.navigate("ModelA");
     }
-    if (title === "Spoilage Sim") {
+    if (title === "Spoilage Forecast") {
       navigation.navigate("ModelB");
     }
     if (title === "Smart Routing") {
@@ -86,7 +86,7 @@ const cards = [
     image: "https://cdn-icons-png.flaticon.com/512/3281/3281306.png",
   },
   {
-    title: "Spoilage Sim",
+    title: "Spoilage Forecast",
     description: "Simulate and optimize your supply chain.",
     image: "https://cdn-icons-png.flaticon.com/512/2991/2991045.png",
   },

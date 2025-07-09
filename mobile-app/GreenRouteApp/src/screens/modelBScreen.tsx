@@ -54,7 +54,7 @@ export default function SpoilageForecastScreen() {
 
   return (
     <ScrollView className="flex-1 bg-lime-50 px-4 pt-16">
-      <Text className="text-2xl font-bold text-gray-800 mb-2">🛒 Spoilage Forecast (Model B)</Text>
+      <Text className="text-2xl font-bold text-gray-800 mb-2">Spoilage Forecast</Text>
       <Text className="text-gray-600 mb-6">Forecast vs Actual Sales for 30 Days</Text>
 
       <TouchableOpacity

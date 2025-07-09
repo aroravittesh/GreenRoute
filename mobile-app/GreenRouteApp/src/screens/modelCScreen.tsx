@@ -57,7 +57,7 @@ export default function ModelCScreen() {
 
   return (
     <ScrollView className="flex-1 bg-lime-50 px-4 pt-16">
-      <Text className="text-2xl font-bold text-gray-800 mb-2">🚚 Distribution Planner (Model C)</Text>
+      <Text className="text-2xl font-bold text-gray-800 mb-2">Distribution Planner</Text>
       <Text className="text-gray-600 mb-6">
         Optimize stock allocation across stores based on demand.
       </Text>

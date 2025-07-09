@@ -613,7 +613,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.title}>GreenRoute</Text>
+        <Text style={styles.title}>Sanchaya</Text>
         <Text style={styles.subtitle}>Please login to your account</Text>
 
         <TextInput

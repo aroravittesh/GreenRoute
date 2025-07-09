@@ -143,7 +143,7 @@ export default function SpoilageForecast() {
       >
         <main className="pt-24 px-6 max-w-7xl mx-auto">
           <div className="mb-10">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">Spoilage Forecast (Model B)</h1>
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">Spoilage Forecast</h1>
             <p className="text-gray-600 mb-4">Forecast vs Actual Sales for 30 Days</p>
             <button
               onClick={runSimulation}

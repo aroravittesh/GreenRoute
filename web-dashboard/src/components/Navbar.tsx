@@ -131,7 +131,7 @@ export default function Navbar() {
           to="/"
           className="text-2xl font-bold text-green-600 tracking-tight hover:opacity-90 transition"
         >
-          GreenRoute
+          Sanchaya
         </Link>
 
         {/* Hamburger Icon (Mobile) */}
@@ -174,7 +174,7 @@ export default function Navbar() {
             onClick={() => handleProtectedNav("/model-b")}
             className="relative group text-gray-700 hover:text-green-600 transition"
           >
-            Spoilage Sim
+            Spoilage Forecast
             <span className="absolute left-0 -bottom-1 w-0 group-hover:w-full h-[2px] bg-green-600 transition-all duration-300"></span>
           </button>
 

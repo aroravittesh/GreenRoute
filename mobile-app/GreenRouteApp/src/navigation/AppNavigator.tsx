@@ -141,7 +141,7 @@ export default function AppNavigator() {
           <Stack.Screen
             name="ModelB"
             component={ModelBScreen}
-            options={{ headerShown: true, title: "Spoilage Sim" }}
+            options={{ headerShown: true, title: "Spoilage Forecast" }}
           />
           <Stack.Screen
             name="ModelC"

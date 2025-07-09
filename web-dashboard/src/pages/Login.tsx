@@ -118,7 +118,7 @@ export default function Login() {
       {/* Left: Branding Side */}     
       <div className="hidden md:flex w-1/2 bg-gradient-to-br from-green-700 to-emerald-800 text-white items-center justify-center px-12">
         <div className="space-y-6">
-          <h1 className="text-5xl font-extrabold tracking-tight leading-tight">GreenRoute</h1>
+          <h1 className="text-5xl font-extrabold tracking-tight leading-tight">Sanchaya</h1>
           <p className="text-lg max-w-md">
             Redefining sustainability with AI-driven food distribution.
           </p>
