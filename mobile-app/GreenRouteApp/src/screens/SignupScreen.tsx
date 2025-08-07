@@ -18,7 +18,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://192.168.29.190:5786/api/signup", {
+//       const response = await axios.post("http://192.168.29.107:5786/api/signup", {
 //         name,
 //         email,
 //         employee_id: employeeId,
@@ -109,7 +109,7 @@ export default function SignupScreen({ navigation }) {
     }
 
     try {
-      const response = await axios.post("http://192.168.29.190:5786/api/signup", {
+      const response = await axios.post("http://192.168.29.107:5786/api/signup", {
         name,
         email,
         employee_id: employeeId,

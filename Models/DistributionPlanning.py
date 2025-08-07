@@ -119,7 +119,7 @@ total_forecasted = df["forecasted_units"].sum()
 print(f"\n📈 Total Forecasted Demand: {int(total_forecasted)} units")
 
 # 🔢 Total Stock Available
-TOTAL_STOCK = 100  # update as needed
+TOTAL_STOCK = 1000  # update as needed
 print(f"📦 Available Stock: {TOTAL_STOCK} units")
 
 # ⚖️ Proportional Distribution

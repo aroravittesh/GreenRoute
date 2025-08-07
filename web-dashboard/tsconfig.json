@@ -1,7 +1,18 @@
+// {
+//   "files": [],
+//   "references": [
+//     { "path": "./tsconfig.app.json" },
+//     { "path": "./tsconfig.node.json" }
+//   ]
+// }
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "jsx": "react-jsx",                  // ✅ Required for React 17+
+    "moduleResolution": "node",         // ✅ Helps resolve React types
+    "esModuleInterop": true,            // ✅ Required for React+TypeScript interop
+    "allowJs": true,                    // Optional: in case you're mixing JS/TS
+    "resolveJsonModule": true,          // Optional: if importing JSONs
+    "isolatedModules": true,            // Optional: helps with React refresh
+    "types": ["react", "react-dom"]     // ✅ Makes JSX types like <div> known
+  }
 }

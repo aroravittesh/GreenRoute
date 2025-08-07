@@ -23,4 +23,4 @@ app.use('/api/model-b', modelBRoutes);
 app.use("/api/model-c", modelCRoutes);
 
 const PORT = process.env.PORT || 5786;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`✅ Server running on port ${PORT}`));

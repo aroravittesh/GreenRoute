@@ -17,7 +17,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://192.168.29.190:5786/api/signup", {
+//       const response = await axios.post("http://192.168.29.107:5786/api/signup", {
 //         name,
 //         email,
 //         employee_id: employeeId,
@@ -90,6 +90,8 @@
 //     </div>
 //   );
 // }
+
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -109,7 +111,7 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post("http://192.168.29.190:5786/api/signup", {
+      const response = await axios.post("http://192.168.29.107:5786/api/signup", {
         name,
         email,
         employee_id: employeeId,
@@ -205,6 +207,4 @@ export default function Signup() {
         </div>
       </div>
     );
-    
- 
 }
