@@ -1,26 +1,68 @@
+// import express from 'express';
+// import dotenv from 'dotenv';
+// import cors from 'cors';
+// import authRoutes from './routes/authRoutes.js';
+// import modelARoutes from './routes/modelA.js'; // ✅ add this line
+// import modelBRoutes from './routes/modelB.js';
+// import modelCRoutes from './routes/modelC.js';
+
+// dotenv.config();
+// const app = express();
+
+// app.use(cors());
+// app.use(express.json());
+
+// app.get('/ping', (req, res) => {
+//   res.send('pong');
+// });
+
+// // Routes
+// app.use('/api', authRoutes);
+// app.use('/api/model-a', modelARoutes); // ✅ this mounts all /model-a endpoints
+// app.use('/api/model-b', modelBRoutes);
+// app.use("/api/model-c", modelCRoutes);
+
+// const PORT = process.env.PORT || 5786;
+// app.listen(PORT, '0.0.0.0', () => console.log(`✅ Server running on port ${PORT}`));
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+
 import authRoutes from './routes/authRoutes.js';
-import modelARoutes from './routes/modelA.js'; // ✅ add this line
+import modelARoutes from './routes/modelA.js';
 import modelBRoutes from './routes/modelB.js';
 import modelCRoutes from './routes/modelC.js';
 
 dotenv.config();
 const app = express();
 
-app.use(cors());
+// ✅ Enable CORS for frontend access
+app.use(cors({
+  origin: ["http://localhost:3000", "http://13.218.87.21"],
+  methods: ["GET", "POST"],
+  credentials: true,
+}));
+
 app.use(express.json());
 
+// ✅ Health check
 app.get('/ping', (req, res) => {
   res.send('pong');
 });
 
-// Routes
-app.use('/api', authRoutes);
-app.use('/api/model-a', modelARoutes); // ✅ this mounts all /model-a endpoints
-app.use('/api/model-b', modelBRoutes);
-app.use("/api/model-c", modelCRoutes);
+// ✅ Optional CORS test endpoint
+app.get('/api/test-cors', (req, res) => {
+  res.json({ status: 'CORS working ✅' });
+});
 
+// ✅ Route mounting
+app.use('/api', authRoutes);
+app.use('/api/model-a', modelARoutes);
+app.use('/api/model-b', modelBRoutes);
+app.use('/api/model-c', modelCRoutes);
+
+// ✅ Start server on port 5786
 const PORT = process.env.PORT || 5786;
-app.listen(PORT, '0.0.0.0', () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server running on http://13.218.87.21:${PORT}`);
+});
