@@ -17,7 +17,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://192.168.29.107:5786/api/login", {
+//       const response = await axios.post("http://13.218.87.21:5786/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -96,7 +96,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://192.168.29.107:5786/api/login", {
+//       const response = await axios.post("http://13.218.87.21:5786/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -204,7 +204,7 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("http://192.168.29.107:5786/api/login", {
+      const response = await axios.post("http://13.218.87.21:5786/api/login", {
         identifier,
         password,
       });
