@@ -207,7 +207,7 @@ import os
 # CONFIG
 SHELF_LIFE_DAYS = 18
 TOTAL_STOCK = 10000
-CSV_INPUT_PATH = "../Backend/results/monthly_bar_chart_data.csv"
+CSV_INPUT_PATH = "../backend/results/monthly_bar_chart_data.csv"
 CSV_OUTPUT_PATH = "results/spoilage_output.csv"
 IMG_OUTPUT_PATH = "results/spoilage_chart.png"
 
