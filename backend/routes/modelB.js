@@ -12,7 +12,7 @@ const router = express.Router();
 
 // 📍 Route to run the spoilage simulation model (Python script)
 router.get("/run", (req, res) => {
-  const scriptPath = path.join(__dirname, "../../Models/spoilagesimulage.py");
+  const scriptPath = path.join(__dirname, "../../Models/SpoilageSimulage.py");
   const cmd = `python3 "${scriptPath}"`;
 
   exec(cmd, (err, stdout, stderr) => {
