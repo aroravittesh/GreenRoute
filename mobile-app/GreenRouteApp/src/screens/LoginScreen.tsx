@@ -25,7 +25,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://13.218.87.21:5786/api/login", {
+//       const response = await axios.post("http://54.197.3.23:5786/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -130,7 +130,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://13.218.87.21:5786/api/login", {
+//       const response = await axios.post("http://54.197.3.23:5786/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -298,7 +298,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://13.218.87.21:5786/api/login", {
+//       const response = await axios.post("http://54.197.3.23:5786/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -446,7 +446,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://13.218.87.21:5786/api/login", {
+//       const response = await axios.post("http://54.197.3.23:5786/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -594,7 +594,7 @@ export default function LoginScreen({ navigation }) {
     }
 
     try {
-      const response = await axios.post("http://13.218.87.21:5786/api/login", {
+      const response = await axios.post("http://54.197.3.23:5786/api/login", {
         identifier,
         password,
       });

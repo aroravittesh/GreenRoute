@@ -38,7 +38,7 @@ const app = express();
 
 // ✅ Enable CORS for frontend access
 app.use(cors({
-  origin: ["http://localhost:5173", "http://13.218.87.21"],
+  origin: ["http://localhost:5173", "http://54.197.3.23"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
@@ -64,5 +64,5 @@ app.use('/api/model-c', modelCRoutes);
 // ✅ Start server on port 5786
 const PORT = process.env.PORT || 5786;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ Server running on http://13.218.87.21:${PORT}`);
+  console.log(`✅ Server running on http://54.197.3.23:${PORT}`);
 });

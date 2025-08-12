@@ -16,7 +16,7 @@ export default function SpoilageForecastScreen() {
   const [loading, setLoading] = useState(false);
 
   // 🧠 Use your MacBook IP
-  const BASE_URL = "http://13.218.87.21:5786";
+  const BASE_URL = "http://54.197.3.23:5786";
 
   useEffect(() => {
     const loadStoredData = async () => {

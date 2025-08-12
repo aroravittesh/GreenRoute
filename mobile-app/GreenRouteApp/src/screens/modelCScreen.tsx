@@ -16,7 +16,7 @@ export default function ModelCScreen() {
   const [metrics, setMetrics] = useState<{ mae: string; mape: string } | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const BASE_URL = "http://13.218.87.21:5786"; // ✅ Update to your IP
+  const BASE_URL = "http://54.197.3.23:5786"; // ✅ Update to your IP
 
   useEffect(() => {
     const loadStored = async () => {

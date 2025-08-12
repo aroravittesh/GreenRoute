@@ -14,7 +14,7 @@
 //     setIsLoading(true);
 //     try {
 //       await fetch(
-//         `http://13.218.87.21:5786/api/model-a/run?store_id=${storeId}&product_id=${productId}`
+//         `http://54.197.3.23:5786/api/model-a/run?store_id=${storeId}&product_id=${productId}`
 //       );
 //       await fetchOutputs();
 //     } catch (err) {
@@ -25,19 +25,19 @@
 
 //   const fetchOutputs = async () => {
 //     try {
-//       const metricsRes = await fetch("http://13.218.87.21:5786/api/model-a/metrics");
+//       const metricsRes = await fetch("http://54.197.3.23:5786/api/model-a/metrics");
 //       const metricsData = await metricsRes.json();
 //       setMetrics({
 //         mae: parseFloat(metricsData.mae).toFixed(2),
 //         mape: parseFloat(metricsData.mape).toFixed(2) + "%",
 //       });
 
-//       const csvRes = await fetch("http://13.218.87.21:5786/api/model-a/predictions");
+//       const csvRes = await fetch("http://54.197.3.23:5786/api/model-a/predictions");
 //       const text = await csvRes.text();
 //       const rows = text.trim().split("\n").map((line) => line.split(","));
 //       setCsvData(rows);
 
-//       setImageUrl(`http://13.218.87.21:5786/api/model-a/image?${Date.now()}`); // cache bust
+//       setImageUrl(`http://54.197.3.23:5786/api/model-a/image?${Date.now()}`); // cache bust
 //     } catch (err) {
 //       console.error(err);
 //     }
@@ -147,15 +147,15 @@
 //     setCsvData([]);
 
 //     try {
-//       await axios.get(`http://13.218.87.21:5786/api/model-a/run`, {
+//       await axios.get(`http://54.197.3.23:5786/api/model-a/run`, {
 //         params: { product_id: productId },
 //       });
 
 //       // Load plot
-//       setImageUrl("http://13.218.87.21:5786/api/model-a/forecast/image");
+//       setImageUrl("http://54.197.3.23:5786/api/model-a/forecast/image");
 
 //       // Fetch CSV
-//       const res = await axios.get("http://13.218.87.21:5786/api/model-a/forecast/data");
+//       const res = await axios.get("http://54.197.3.23:5786/api/model-a/forecast/data");
 //       const parsed = Papa.parse(res.data, { header: true });
 //       setCsvData(parsed.data);
 //     } catch (error) {
@@ -195,7 +195,7 @@
 //         <div className="mt-6">
 //           <img src={imageUrl} alt="Forecast Plot" className="rounded shadow-md max-w-full" />
 //           <a
-//             href="http://13.218.87.21:5786/api/model-a/forecast/data"
+//             href="http://54.197.3.23:5786/api/model-a/forecast/data"
 //             download
 //             className="inline-block mt-4 text-green-700 hover:underline"
 //           >
@@ -247,9 +247,9 @@
 
 //   const runForecast = async () => {
 //     try {
-//       await axios.get(`http://13.218.87.21:5786/api/model-a/run?product_id=${productId}`);
-//       setChartUrl(`http://13.218.87.21:5786/api/model-a/chart?ts=${Date.now()}`);
-//       const csv = await axios.get(`http://13.218.87.21:5786/api/model-a/data`);
+//       await axios.get(`http://54.197.3.23:5786/api/model-a/run?product_id=${productId}`);
+//       setChartUrl(`http://54.197.3.23:5786/api/model-a/chart?ts=${Date.now()}`);
+//       const csv = await axios.get(`http://54.197.3.23:5786/api/model-a/data`);
 //       const parsed = csv.data.split("\n").map((row: string) => row.split(","));
 //       setCsvData(parsed);
 //     } catch (err) {
@@ -323,10 +323,10 @@ export default function ModelA() {
     if (!productId.trim()) return alert("Please enter a product ID.");
     setLoading(true);
     try {
-      await axios.get(`http://13.218.87.21:5786/api/model-a/run?product_id=${productId}`);
+      await axios.get(`http://54.197.3.23:5786/api/model-a/run?product_id=${productId}`);
 
-      const chart = `http://13.218.87.21:5786/api/model-a/chart?ts=${Date.now()}`;
-      const csv = await axios.get(`http://13.218.87.21:5786/api/model-a/data`);
+      const chart = `http://54.197.3.23:5786/api/model-a/chart?ts=${Date.now()}`;
+      const csv = await axios.get(`http://54.197.3.23:5786/api/model-a/data`);
       const parsed = csv.data.split("\n").map((row: string) => row.split(","));
 
       setChartUrl(chart);

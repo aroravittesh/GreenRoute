@@ -11,9 +11,9 @@
 //   const runSimulation = async () => {
 //     setLoading(true);
 //     try {
-//       await axios.get("http://13.218.87.21:5786/api/model-b/run");
-//       setChartUrl(`http://13.218.87.21:5786/api/model-b/image?ts=${Date.now()}`);
-//       const csv = await axios.get("http://13.218.87.21:5786/api/model-b/predictions");
+//       await axios.get("http://54.197.3.23:5786/api/model-b/run");
+//       setChartUrl(`http://54.197.3.23:5786/api/model-b/image?ts=${Date.now()}`);
+//       const csv = await axios.get("http://54.197.3.23:5786/api/model-b/predictions");
 //       const parsed = csv.data.split("\n").map((row: string) => row.split(","));
 //       setCsvData(parsed);
 //     } catch (err) {
@@ -111,13 +111,13 @@ export default function SpoilageForecast() {
   const runSimulation = async () => {
     setLoading(true);
     try {
-      await axios.get("http://13.218.87.21:5786/api/model-b/run");
+      await axios.get("http://54.197.3.23:5786/api/model-b/run");
 
-      const imageUrl = `http://13.218.87.21:5786/api/model-b/image?ts=${Date.now()}`;
+      const imageUrl = `http://54.197.3.23:5786/api/model-b/image?ts=${Date.now()}`;
       setChartUrl(imageUrl);
       localStorage.setItem("chartUrl", imageUrl);
 
-      const csv = await axios.get("http://13.218.87.21:5786/api/model-b/predictions");
+      const csv = await axios.get("http://54.197.3.23:5786/api/model-b/predictions");
       const parsed = csv.data
         .split("\n")
         .map((row: string) => row.split(","))
