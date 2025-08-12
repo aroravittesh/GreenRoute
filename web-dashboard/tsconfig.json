@@ -1,18 +1,17 @@
-// {
-//   "files": [],
-//   "references": [
-//     { "path": "./tsconfig.app.json" },
-//     { "path": "./tsconfig.node.json" }
-//   ]
-// }
 {
   "compilerOptions": {
-    "jsx": "react-jsx",                  // ✅ Required for React 17+
-    "moduleResolution": "node",         // ✅ Helps resolve React types
-    "esModuleInterop": true,            // ✅ Required for React+TypeScript interop
-    "allowJs": true,                    // Optional: in case you're mixing JS/TS
-    "resolveJsonModule": true,          // Optional: if importing JSONs
-    "isolatedModules": true,            // Optional: helps with React refresh
-    "types": ["react", "react-dom"]     // ✅ Makes JSX types like <div> known
-  }
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],   // <-- adds Promise, fetch, JSX DOM, etc.
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src", "vite-env.d.ts"],
+  "exclude": ["dist", "node_modules"]
 }

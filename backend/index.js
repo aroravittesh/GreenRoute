@@ -38,7 +38,7 @@ const app = express();
 
 // ✅ Enable CORS for frontend access
 app.use(cors({
-  origin: ["http://localhost:5173", "http://54.197.3.23"],
+  origin: ["http://localhost:5173", "http://54.197.3.23", "https://sanchaya-web.web.app"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
