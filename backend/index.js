@@ -63,6 +63,7 @@ app.use('/api/model-c', modelCRoutes);
 
 // ✅ Start server on port 5786
 const PORT = process.env.PORT || 5786;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ Server running on http://54.197.3.23:${PORT}`);
+app.listen(PORT, "127.0.0.1", () => {
+  console.log(`✅ Server running on http://127.0.0.1:${PORT}`);
 });
+
