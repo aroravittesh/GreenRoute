@@ -53,7 +53,7 @@ exports.default = Signup;
 //       return;
 //     }
 //     try {
-//       const response = await axios.post("http://54.197.3.23:5786/api/signup", {
+//       const response = await axios.post("https://sanchaya.work.gd/api/signup", {
 //         name,
 //         email,
 //         employee_id: employeeId,
@@ -142,7 +142,7 @@ function Signup() {
                     _d.label = 1;
                 case 1:
                     _d.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, axios_1.default.post("http://54.197.3.23:5786/api/signup", {
+                    return [4 /*yield*/, axios_1.default.post("https://sanchaya.work.gd/api/signup", {
                             name: name,
                             email: email,
                             employee_id: employeeId,

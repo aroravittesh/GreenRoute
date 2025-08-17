@@ -17,7 +17,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://54.197.3.23:5786/api/login", {
+//       const response = await axios.post("https://sanchaya.work.gd/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -96,7 +96,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://54.197.3.23:5786/api/login", {
+//       const response = await axios.post("https://sanchaya.work.gd/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -204,7 +204,7 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("http://54.197.3.23:5786/api/login", {
+      const response = await axios.post("https://sanchaya.work.gd/api/login", {
         identifier,
         password,
       });

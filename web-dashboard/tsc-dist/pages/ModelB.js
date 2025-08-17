@@ -48,9 +48,9 @@ exports.default = SpoilageForecast;
 //   const runSimulation = async () => {
 //     setLoading(true);
 //     try {
-//       await axios.get("http://54.197.3.23:5786/api/model-b/run");
-//       setChartUrl(`http://54.197.3.23:5786/api/model-b/image?ts=${Date.now()}`);
-//       const csv = await axios.get("http://54.197.3.23:5786/api/model-b/predictions");
+//       await axios.get("https://sanchaya.work.gd/api/model-b/run");
+//       setChartUrl(`https://sanchaya.work.gd/api/model-b/image?ts=${Date.now()}`);
+//       const csv = await axios.get("https://sanchaya.work.gd/api/model-b/predictions");
 //       const parsed = csv.data.split("\n").map((row: string) => row.split(","));
 //       setCsvData(parsed);
 //     } catch (err) {
@@ -150,13 +150,13 @@ function SpoilageForecast() {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, axios_1.default.get("http://54.197.3.23:5786/api/model-b/run")];
+                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.work.gd/api/model-b/run")];
                 case 2:
                     _a.sent();
-                    imageUrl = "http://54.197.3.23:5786/api/model-b/image?ts=".concat(Date.now());
+                    imageUrl = "https://sanchaya.work.gd/api/model-b/image?ts=".concat(Date.now());
                     setChartUrl(imageUrl);
                     localStorage.setItem("chartUrl", imageUrl);
-                    return [4 /*yield*/, axios_1.default.get("http://54.197.3.23:5786/api/model-b/predictions")];
+                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.work.gd/api/model-b/predictions")];
                 case 3:
                     csv = _a.sent();
                     parsed = csv.data
