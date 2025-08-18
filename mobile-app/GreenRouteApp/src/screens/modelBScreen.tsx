@@ -16,7 +16,7 @@ export default function SpoilageForecastScreen() {
   const [loading, setLoading] = useState(false);
 
   // 🧠 Use your MacBook IP
-  const BASE_URL = "https://sanchaya.work.gd";
+  const BASE_URL = "https://sanchaya.live";
 
   useEffect(() => {
     const loadStoredData = async () => {

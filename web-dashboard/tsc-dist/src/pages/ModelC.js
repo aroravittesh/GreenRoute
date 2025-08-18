@@ -52,17 +52,17 @@ exports.default = DistributionPlanner;
 //     setLoading(true);
 //     try {
 //       // Run backend optimization
-//       const result = await axios.get("https://sanchaya.work.gd/api/model-c/run");
+//       const result = await axios.get("https://sanchaya.live/api/model-c/run");
 //       // Update metrics
 //       setMetrics({
 //         mae: result.data.mae.toFixed(2),
 //         mape: result.data.mape.toFixed(2),
 //       });
 //       // Update chart
-//       setChartUrl(`https://sanchaya.work.gd/api/model-c/image?ts=${Date.now()}`);
+//       setChartUrl(`https://sanchaya.live/api/model-c/image?ts=${Date.now()}`);
 //       // Get CSV results
 //       const csv = await axios.get(
-//         "https://sanchaya.work.gd/api/model-c/predictions"
+//         "https://sanchaya.live/api/model-c/predictions"
 //       );
 //       const parsed = csv.data.split("\n").map((row: string) => row.split(","));
 //       setCsvData(parsed);
@@ -175,7 +175,7 @@ function DistributionPlanner() {
                 .split("\n")
                 .map(function (row) { return row.split(","); });
             setCsvData(parsedCsv);
-            setChartUrl("https://sanchaya.work.gd/api/model-c/image?ts=".concat(savedTimestamp));
+            setChartUrl("https://sanchaya.live/api/model-c/image?ts=".concat(savedTimestamp));
         }
     }, []);
     var runOptimizer = function () { return __awaiter(_this, void 0, void 0, function () {
@@ -187,13 +187,13 @@ function DistributionPlanner() {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.work.gd/api/model-c/run")];
+                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.live/api/model-c/run")];
                 case 2:
                     _a.sent();
                     timestamp = Date.now();
-                    setChartUrl("https://sanchaya.work.gd/api/model-c/image?ts=".concat(timestamp));
+                    setChartUrl("https://sanchaya.live/api/model-c/image?ts=".concat(timestamp));
                     localStorage.setItem(STORAGE_KEY_TIMESTAMP, timestamp.toString());
-                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.work.gd/api/model-c/predictions")];
+                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.live/api/model-c/predictions")];
                 case 3:
                     csv = _a.sent();
                     parsed = csv.data.trim().split("\n").map(function (row) { return row.split(","); });

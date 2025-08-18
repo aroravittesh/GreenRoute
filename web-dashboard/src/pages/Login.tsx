@@ -17,7 +17,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("https://sanchaya.work.gd/api/login", {
+//       const response = await axios.post("https://sanchaya.live/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -96,7 +96,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("https://sanchaya.work.gd/api/login", {
+//       const response = await axios.post("https://sanchaya.live/api/login", {
 //         identifier,
 //         password,
 //       });
@@ -204,7 +204,7 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("https://sanchaya.work.gd/api/login", {
+      const response = await axios.post("https://sanchaya.live/api/login", {
         identifier,
         password,
       });

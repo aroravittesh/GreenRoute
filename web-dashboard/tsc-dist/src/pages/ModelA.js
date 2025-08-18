@@ -50,7 +50,7 @@ exports.default = ModelA;
 //     setIsLoading(true);
 //     try {
 //       await fetch(
-//         `https://sanchaya.work.gd/api/model-a/run?store_id=${storeId}&product_id=${productId}`
+//         `https://sanchaya.live/api/model-a/run?store_id=${storeId}&product_id=${productId}`
 //       );
 //       await fetchOutputs();
 //     } catch (err) {
@@ -60,17 +60,17 @@ exports.default = ModelA;
 //   };
 //   const fetchOutputs = async () => {
 //     try {
-//       const metricsRes = await fetch("https://sanchaya.work.gd/api/model-a/metrics");
+//       const metricsRes = await fetch("https://sanchaya.live/api/model-a/metrics");
 //       const metricsData = await metricsRes.json();
 //       setMetrics({
 //         mae: parseFloat(metricsData.mae).toFixed(2),
 //         mape: parseFloat(metricsData.mape).toFixed(2) + "%",
 //       });
-//       const csvRes = await fetch("https://sanchaya.work.gd/api/model-a/predictions");
+//       const csvRes = await fetch("https://sanchaya.live/api/model-a/predictions");
 //       const text = await csvRes.text();
 //       const rows = text.trim().split("\n").map((line) => line.split(","));
 //       setCsvData(rows);
-//       setImageUrl(`https://sanchaya.work.gd/api/model-a/image?${Date.now()}`); // cache bust
+//       setImageUrl(`https://sanchaya.live/api/model-a/image?${Date.now()}`); // cache bust
 //     } catch (err) {
 //       console.error(err);
 //     }
@@ -170,13 +170,13 @@ exports.default = ModelA;
 //     setImageUrl("");
 //     setCsvData([]);
 //     try {
-//       await axios.get(`https://sanchaya.work.gd/api/model-a/run`, {
+//       await axios.get(`https://sanchaya.live/api/model-a/run`, {
 //         params: { product_id: productId },
 //       });
 //       // Load plot
-//       setImageUrl("https://sanchaya.work.gd/api/model-a/forecast/image");
+//       setImageUrl("https://sanchaya.live/api/model-a/forecast/image");
 //       // Fetch CSV
-//       const res = await axios.get("https://sanchaya.work.gd/api/model-a/forecast/data");
+//       const res = await axios.get("https://sanchaya.live/api/model-a/forecast/data");
 //       const parsed = Papa.parse(res.data, { header: true });
 //       setCsvData(parsed.data);
 //     } catch (error) {
@@ -211,7 +211,7 @@ exports.default = ModelA;
 //         <div className="mt-6">
 //           <img src={imageUrl} alt="Forecast Plot" className="rounded shadow-md max-w-full" />
 //           <a
-//             href="https://sanchaya.work.gd/api/model-a/forecast/data"
+//             href="https://sanchaya.live/api/model-a/forecast/data"
 //             download
 //             className="inline-block mt-4 text-green-700 hover:underline"
 //           >
@@ -260,9 +260,9 @@ exports.default = ModelA;
 //   const [csvData, setCsvData] = useState<string[][]>([]);
 //   const runForecast = async () => {
 //     try {
-//       await axios.get(`https://sanchaya.work.gd/api/model-a/run?product_id=${productId}`);
-//       setChartUrl(`https://sanchaya.work.gd/api/model-a/chart?ts=${Date.now()}`);
-//       const csv = await axios.get(`https://sanchaya.work.gd/api/model-a/data`);
+//       await axios.get(`https://sanchaya.live/api/model-a/run?product_id=${productId}`);
+//       setChartUrl(`https://sanchaya.live/api/model-a/chart?ts=${Date.now()}`);
+//       const csv = await axios.get(`https://sanchaya.live/api/model-a/data`);
 //       const parsed = csv.data.split("\n").map((row: string) => row.split(","));
 //       setCsvData(parsed);
 //     } catch (err) {
@@ -340,11 +340,11 @@ function ModelA() {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 4, 5, 6]);
-                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.work.gd/api/model-a/run?product_id=".concat(productId))];
+                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.live/api/model-a/run?product_id=".concat(productId))];
                 case 2:
                     _a.sent();
-                    chart = "https://sanchaya.work.gd/api/model-a/chart?ts=".concat(Date.now());
-                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.work.gd/api/model-a/data")];
+                    chart = "https://sanchaya.live/api/model-a/chart?ts=".concat(Date.now());
+                    return [4 /*yield*/, axios_1.default.get("https://sanchaya.live/api/model-a/data")];
                 case 3:
                     csv = _a.sent();
                     parsed = csv.data.split("\n").map(function (row) { return row.split(","); });

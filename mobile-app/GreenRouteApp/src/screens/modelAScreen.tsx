@@ -36,9 +36,9 @@ export default function ModelAScreen() {
     if (!productId.trim()) return alert('Please enter a product ID');
     setLoading(true);
     try {
-      await axios.get(`https://sanchaya.work.gd/api/model-a/run?product_id=${productId}`);
-      const chart = `https://sanchaya.work.gd/api/model-a/chart?ts=${Date.now()}`;
-      const csv = await axios.get(`https://sanchaya.work.gd/api/model-a/data`);
+      await axios.get(`https://sanchaya.live/api/model-a/run?product_id=${productId}`);
+      const chart = `https://sanchaya.live/api/model-a/chart?ts=${Date.now()}`;
+      const csv = await axios.get(`https://sanchaya.live/api/model-a/data`);
       const parsed = csv.data.split('\n').map((row: string) => row.split(','));
 
       setChartUrl(chart);

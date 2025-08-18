@@ -17,7 +17,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("https://sanchaya.work.gd/api/signup", {
+//       const response = await axios.post("https://sanchaya.live/api/signup", {
 //         name,
 //         email,
 //         employee_id: employeeId,
@@ -111,7 +111,7 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post("https://sanchaya.work.gd/api/signup", {
+      const response = await axios.post("https://sanchaya.live/api/signup", {
         name,
         email,
         employee_id: employeeId,

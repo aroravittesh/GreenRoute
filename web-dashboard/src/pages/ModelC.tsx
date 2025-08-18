@@ -15,7 +15,7 @@
 //     setLoading(true);
 //     try {
 //       // Run backend optimization
-//       const result = await axios.get("https://sanchaya.work.gd/api/model-c/run");
+//       const result = await axios.get("https://sanchaya.live/api/model-c/run");
 
 //       // Update metrics
 //       setMetrics({
@@ -24,11 +24,11 @@
 //       });
 
 //       // Update chart
-//       setChartUrl(`https://sanchaya.work.gd/api/model-c/image?ts=${Date.now()}`);
+//       setChartUrl(`https://sanchaya.live/api/model-c/image?ts=${Date.now()}`);
 
 //       // Get CSV results
 //       const csv = await axios.get(
-//         "https://sanchaya.work.gd/api/model-c/predictions"
+//         "https://sanchaya.live/api/model-c/predictions"
 //       );
 //       const parsed = csv.data.split("\n").map((row: string) => row.split(","));
 //       setCsvData(parsed);
@@ -148,20 +148,20 @@ export default function DistributionPlanner() {
         .split("\n")
         .map((row: string) => row.split(","));
       setCsvData(parsedCsv);
-      setChartUrl(`https://sanchaya.work.gd/api/model-c/image?ts=${savedTimestamp}`);
+      setChartUrl(`https://sanchaya.live/api/model-c/image?ts=${savedTimestamp}`);
     }
   }, []);
 
   const runOptimizer = async () => {
     setLoading(true);
     try {
-      await axios.get("https://sanchaya.work.gd/api/model-c/run");
+      await axios.get("https://sanchaya.live/api/model-c/run");
 
       const timestamp = Date.now();
-      setChartUrl(`https://sanchaya.work.gd/api/model-c/image?ts=${timestamp}`);
+      setChartUrl(`https://sanchaya.live/api/model-c/image?ts=${timestamp}`);
       localStorage.setItem(STORAGE_KEY_TIMESTAMP, timestamp.toString());
 
-      const csv = await axios.get("https://sanchaya.work.gd/api/model-c/predictions");
+      const csv = await axios.get("https://sanchaya.live/api/model-c/predictions");
       const parsed = csv.data.trim().split("\n").map((row: string) => row.split(","));
       setCsvData(parsed);
       localStorage.setItem(STORAGE_KEY_CSV, csv.data.trim());
